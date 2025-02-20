@@ -1,0 +1,13 @@
+tasks:
+  - init: |
+      sdk install java 11.0.12-open
+      sdk install gradle 7.4.2
+      mkdir -p $HOME/android-sdk
+      export ANDROID_HOME=$HOME/android-sdk
+      wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip
+      unzip commandlinetools-linux-8512546_latest.zip -d $ANDROID_HOME
+      yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --licenses
+      $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.0"
+    command: |
+      export ANDROID_HOME=$HOME/android-sdk
+      ./gradlew assembleDebug
